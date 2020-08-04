@@ -1,0 +1,17 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-interscribe/pro/test
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2020
+// License:      MIT License
+// Initial date: Aug 3, 2020
+// Contents:     Run as RWSERVE plugin
+//
+//=============================================================================
+
+//
+// ---------- Run as RWSERVE plugin  ---------- 
+run {
+	sh node --inspect=165.227.11.3:9229 ../../../app/rwserve/dbg/main.js ../etc/interscribe-config   //2> /dev/null
+}

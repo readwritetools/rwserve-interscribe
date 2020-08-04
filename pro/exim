@@ -1,0 +1,43 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-interscribe/pro/exim
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2020
+// License:      MIT License
+// Initial date: Aug 3, 2020
+// Contents:     Convert ES6 import/export syntax to require/module syntax
+//
+//=============================================================================
+
+template {
+	eximjs 		eximjs <source> <dest>
+}
+
+// ---------- rewrite export/import (src) ---------- 
+recurse {
+	source    '../src'
+	dest      '../dbg'
+	overwrite older
+	exec      eximjs
+}
+
+// ---------- look for cruft in dbg compared to original src ---------- 
+compare {
+	source    '../dbg'
+	dest      '../src'
+}
+
+// ---------- copy dbg to srv/rwserve-plugin for in-place testing ---------- 
+copy {
+	source    '../dbg'
+	dest      '/srv/rwserve-plugins/node_modules/rwserve-interscribe/dist'
+	overwrite older
+}
+
+// ---------- copy package.json to srv/rwserve-plugin for in-place testing ---------- 
+copy {
+	source    '../package.json'
+	dest      '/srv/rwserve-plugins/node_modules/rwserve-interscribe/package.json'
+	overwrite older
+}

@@ -1,0 +1,34 @@
+{
+  "name": "rwserve-interscribe",
+  "version": "1.0.0",
+  "description": "RWSERVE plugin to interscribe text into an existing file",
+  "author": "Read Write Tools",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/readwritetools/rwserve-interscribe.git"
+  },
+  "dependencies": {
+    "rwserve-plugin-sdk": "^1.0.8"
+  },
+  "scripts": {
+    "bump-version": "npm version patch && git push && git push --tags",
+    "start": "rwserve ./etc/interscribe-config"
+  },
+  "keywords": [
+    "rwserve",
+    "http2",
+    "plugins",
+    "readwritetools"
+  ],
+  "bugs": {
+    "url": "https://github.com/readwritetools/rwserve-interscribe/issues"
+  },
+  "homepage": "https://rwserve.readwritetools.com/plugins/rwserve-interscribe.blue",
+  "files": [
+    "dist",
+    "etc",
+    "img"
+  ]
+}

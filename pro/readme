@@ -1,0 +1,19 @@
+!blue 2.0
+//=============================================================================
+//
+// File:         rwserve-interscribe/pro/readme
+// Language:     prorenata script
+// Copyright:    Read Write Tools © 2020
+// License:      MIT License
+// Initial date: Aug 3, 2020
+// Contents:     Convert story to markdown, and copy from hub.readwritetools.com
+//
+// Previewer:	https://pandao.github.io/editor.md/en.html
+//
+//=============================================================================
+
+// ---------- compile .blue into .md and copy from hub.readwritetools.com ---------- 
+run {
+	sh ssh nk024 blue compile /srv/readwritetools.com/hub/public/plugins/ghfm/interscribe.blue /srv/readwritetools.com/hub/public/plugins/ghfm/interscribe.md --emit=ghfm
+	sh rsync root@nk024:/srv/readwritetools.com/hub/public/plugins/ghfm/interscribe.md ../readme.md
+}

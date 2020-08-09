@@ -31,17 +31,17 @@
 */
 //=============================================================================
 
-import {log} 				from 'rwserve-plugin-sdk';
-import {expect} 			from 'rwserve-plugin-sdk';
-import {SC} 				from 'rwserve-plugin-sdk';
-import {Pfile}				from 'joezone';
-import {TextReader}			from 'joezone';
-import path					from 'path';
-import fs					from 'fs';
-import DocumentList			from './document-list.class.js';
-import DocumentRef			from './document-ref.class.js';
+var log = require('rwserve-plugin-sdk').log;
+var expect = require('rwserve-plugin-sdk').expect;
+var SC = require('rwserve-plugin-sdk').SC;
+var Pfile = require('joezone').Pfile;
+var TextReader = require('joezone').TextReader;
+var path = require('path');
+var fs = require('fs');
+var DocumentList = require('./document-list.class.js');
+var DocumentRef = require('./document-ref.class.js');
 
-export default class RwserveInterscribe {
+module.exports = class RwserveInterscribe {
 
 	constructor(hostConfig) {
 		

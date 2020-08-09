@@ -9,9 +9,9 @@
 //
 //=============================================================================
 
-import {expect}			from 'joezone';
+var expect = require('joezone').expect;
 
-export default class DocumentRef {
+module.exports = class DocumentRef {
 	
     constructor() {
 		this.url = '';							// https://example.com/dir/subdir/filename

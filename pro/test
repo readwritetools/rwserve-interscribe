@@ -15,3 +15,6 @@
 run {
 	sh node --inspect=165.227.11.3:9229 ../../../app/rwserve/dbg/main.js ../etc/interscribe-config   //2> /dev/null
 }
+
+
+// curl -k https://localhost:7443/test.blue

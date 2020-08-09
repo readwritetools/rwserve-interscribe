@@ -10,6 +10,7 @@
     "url": "https://github.com/readwritetools/rwserve-interscribe.git"
   },
   "dependencies": {
+    "joezone": "^1.1.37",
     "rwserve-plugin-sdk": "^1.0.8"
   },
   "scripts": {

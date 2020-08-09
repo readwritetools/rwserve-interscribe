@@ -11,10 +11,27 @@ server {
 	cluster-size 1
 	
 	registration {
-		customer-number CN-UNREGISTERED
-		access-key      AK-UNREGISTERED
+		customer-number CN-AAC-DEFGH //CN-UNREGISTERED
+		access-key      AK-AAC-DEFGH //AK-UNREGISTERED
 	}
 
+	modules {
+		information-headers on
+		content-encoding on
+		etag on
+		cache-control on
+	}
+	
+	cache-control {
+        `*.html`           *instructions='no-cache, no-store, must-revalidate'
+        `*.css`            *instructions='public, max-age=86400'
+        `*.js`             *instructions='public, max-age=86400'
+        `/favicon.ico`     *instructions='public, max-age=7776000'
+        `*.gif`            *instructions='public, max-age=7776000'
+        `*.png`            *instructions='public, max-age=7776000'
+        `*.jpeg`           *instructions='public, max-age=7776000'
+    }
+	
 	request {
 		methods GET,HEAD
 
@@ -23,10 +40,27 @@ server {
 		}
 	}
 	
+	response {
+		content-encoding {
+			text/html				br,gzip,deflate
+		}
+	}
+
 	content-types {
 		html    text/html
 	}
-
+		
+	logging {
+		orientation vertical
+		message-type {
+            request         on
+            staging         on
+            information     on
+            response        on
+            network         off
+            cluster         off
+        }
+	}
 }
 
 host {
@@ -44,13 +78,18 @@ host {
 		rwserve-interscribe {
 			location `$PLUGIN-PATH`
 			config {
-				snrfilter-file      /palau/plugins.rwserve-interscribe/etc/blue-rwt-snrfilter
-				insertion-area      <!-- rwserve-interscribe -->
+				interscribe-cache   /srv/rwserve/configuration-docs/interscribe-cache
+				cache-duration      86400						// 1 day = 86400 = 24 * 60 * 60 (in seconds)
+				snrfilter-file      /palau/plugins/rwserve-interscribe/etc/data/blue-rwt-snrfilter
+				insertion-target    <div id=masthead>
+				keep-target			after						// before | after | discard
 				background			#777
 			}
 		}
 		router {
-			`/*.html`  *methods=GET,HEAD  *plugin=rwserve-interscribe
+			`*.blue`  *methods=GET,HEAD  *plugin=rwserve-blue 
+			`*.blue`  *methods=GET,HEAD  *plugin=rwserve-interscribe
+			`*.html`  *methods=GET,HEAD  *plugin=rwserve-interscribe
 		}	
 	}
 }

@@ -41,3 +41,4 @@ copy {
 	dest      '/srv/rwserve-plugins/node_modules/rwserve-interscribe/package.json'
 	overwrite older
 }
+

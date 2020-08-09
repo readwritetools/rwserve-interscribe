@@ -10,7 +10,7 @@
 !topwords stack,2020,full,layers,pronounced,team,welcome,skills
 
 !url https://2020stack.com/2020-002.blue
-!host 2020stack.com
+!host localhost
 !lastmod 2019-12-28
 !title My Perfect 2020 Stack - A new full stack, for a new generation | 2020 Stack
 !description The journey from “full stack” to “2020 stack” has a few surprise winners and losers.

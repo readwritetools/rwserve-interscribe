@@ -78,7 +78,7 @@ plugins {
             interscribe-cache   /srv/example.com/interscribe-cache
             cache-duration      86400
             snrfilter-file      /srv/example.com/etc/snrfilter
-            insertion-target    <div id=interscribe-target>
+            insertion-target    < div id=interscribe-target>
             keep-target         before
             background          #777
         }

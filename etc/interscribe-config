@@ -11,8 +11,8 @@ server {
 	cluster-size 1
 	
 	registration {
-		customer-number CN-AAC-DEFGH //CN-UNREGISTERED
-		access-key      AK-AAC-DEFGH //AK-UNREGISTERED
+		customer-number CN-UNREGISTERED
+		access-key      AK-UNREGISTERED
 	}
 
 	modules {
@@ -51,8 +51,8 @@ server {
 	}
 		
 	logging {
-		orientation vertical
-		message-type {
+        orientation vertical
+        message-type {
             request         on
             staging         on
             information     on
@@ -70,19 +70,19 @@ host {
 	dynamic-cache  `$DOCUMENTS-PATH/dynamic-cache`
 	landing-page   `index.blue`
 	tls {
-		private-key	`$PRIVATE-KEY`
-	    certificate	`$CERTIFICATE`
+	    private-key  `$PRIVATE-KEY`
+	    certificate  `$CERTIFICATE`
 	}
 
 	plugins {
 		rwserve-interscribe {
 			location `$PLUGIN-PATH`
 			config {
-				interscribe-cache   /srv/rwserve/configuration-docs/interscribe-cache
-				cache-duration      86400						// 1 day = 86400 = 24 * 60 * 60 (in seconds)
-				snrfilter-file      /palau/plugins/rwserve-interscribe/etc/data/blue-rwt-snrfilter
-				insertion-target    <div id=masthead>
-				keep-target			after						// before | after | discard
+				interscribe-cache   /srv/example.com/interscribe-cache
+				cache-duration      86400
+				snrfilter-file      /srv/example.com/etc/snrfilter
+				insertion-target    <div id=interscribe-target>
+				keep-target			before
 				background			#777
 			}
 		}

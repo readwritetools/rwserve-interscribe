@@ -38,7 +38,8 @@ list and inserted into the working document at a designated target point.
 A cached copy of the interscribed merge is kept in the *interscribe-cache* for a
 specified period of time and used for subsequent HTTP requests.
 
-This plugin may be use with  documents or HTML documents.
+This plugin may be used with <span>BLUE</span><span>PHRASE</span> documents or
+HTML documents.
 
 #### Customization
 
@@ -115,8 +116,9 @@ plugins {
 	<dd>The background color to use with the interscribed text. Any HTML color format may be used, like: <code>gray, #777, rgb(127,127,127)</code>.</dd>
 </dl>
 
-The sample `router` shown above will route any `GET` or `HEAD` request for  and HTML
-document to the ```/interscribe``` plugin for processing.
+The sample `router` shown above will route any `GET` or `HEAD` request for <span>
+BLUE</span><span>PHRASE</span> and HTML document to the ```/interscribe``` plugin for
+processing.
 
 #### Cookbook
 

@@ -20,13 +20,15 @@ var DocumentRef = require('./document-ref.class.js');
 
 module.exports = class DocumentList {
 
-	constructor(hostname, snrfilterFile) {
+	constructor(hostname, snrfilterFile, snrGrades) {
 		expect(hostname, 'String');
 		expect(snrfilterFile, 'String');
+    	expect(snrGrades, 'Array');
 		
 		this.hostname = hostname;
 		this.snrfilterFile = new Pfile(snrfilterFile);
 		this.snrfilterIndex = new Pfile(this.snrfilterFile.getPath()).addPath('snrfilter-index');
+		this.snrGrades = snrGrades;
 
 		this.countTotal = 0;				// number of document refs in snrfilterFile
 		this.countKeep = 0;					// number of document refs kept
@@ -50,9 +52,27 @@ module.exports = class DocumentList {
 		this.documentList.push(this.currentDocumentRef);
     }
     
-    // Add it to the list if the host is not this
-    keepDocumentInList() {
-		this.documentList.push(this.currentDocumentRef);
+    // Call this routine whenever !host or !snr:grade is parsed.
+    // Push the document to the list only when both values have been parsed, and only if:
+    //   the host is not this host
+    //   the snrGrade is acceptable
+    conditionalKeepDoc() {
+    	// wait for both values to be parsed . . .
+    	if (this.currentDocumentRef.host == '')
+    		return;
+    	if (this.currentDocumentRef.snrGrade == '')
+    		return;
+    	
+    	// we only want to keep document refs to external hosts
+		if (this.currentDocumentRef.host == this.hostname)
+			return;
+
+		// we only want to keep document refs if they have an SNR grade that's specified in the configured list
+		if (!this.snrGrades.includes(this.currentDocumentRef.snrGrade))
+			return;
+		
+	    this.documentList.push(this.currentDocumentRef);
+		this.countKeep++;
     }
     
     //> snrfilterIndex is a file containing a single numeric value
@@ -121,11 +141,7 @@ module.exports = class DocumentList {
 	    				
 	    			case '!host':
 	    				this.currentDocumentRef.host = value;
-	    				// only keep references to external hosts
-	    				if (this.currentDocumentRef.host != this.hostname) {
-	    					this.keepDocumentInList();
-		    				this.countKeep++;
-	    				}
+    					this.conditionalKeepDoc();
 	    				break;
 	    				
 	    			case '!lastmod':
@@ -146,6 +162,11 @@ module.exports = class DocumentList {
 	    				
 	    			case '!rwt:kicker':
 	    				this.currentDocumentRef.rwtKicker = value;
+	    				break;
+	    				
+	    			case '!snr:grade':
+	    				this.currentDocumentRef.snrGrade = value;
+    					this.conditionalKeepDoc();
 	    				break;
 	    				
 	    			case '!keywords':

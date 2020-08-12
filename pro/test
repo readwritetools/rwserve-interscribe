@@ -17,4 +17,4 @@ run {
 }
 
 
-// curl -k https://localhost:7443/test.blue
+// curl -v -k https://localhost:7443/test.blue

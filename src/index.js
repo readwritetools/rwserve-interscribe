@@ -17,6 +17,7 @@
 				interscribe-cache   /srv/example.com/interscribe-cache
 				cache-duration      86400						// 1 day = 86400 = 24 * 60 * 60 (in seconds)
 				snrfilter-file      /palau/plugins.rwserve-interscribe/etc/blue-rwt-snrfilter
+				snr-grades			A,B,C,D						// one or more grades to accept
 				insertion-target    <div id=masthead>
 				keep-target			before						// before | after | discard
 				background			#777
@@ -51,6 +52,7 @@ export default class RwserveInterscribe {
 		this.pluginConfig     = hostConfig.pluginsConfig.rwserveInterscribe;
 		this.pluginVersion    = this.pluginConfig.pluginVersion;		
 		this.interscribeCache = this.pluginConfig.interscribeCache;
+		this.snrGrades        = (this.pluginConfig.snrGrades == undefined) ? ['A', 'B', 'C', 'D'] : this.pluginConfig.snrGrades.split(',');
 		this.cacheDuration    = this.pluginConfig.cacheDuration;
 		this.snrfilterFile    = this.pluginConfig.snrfilterFile;
 		this.insertionTarget  = this.pluginConfig.insertionTarget;
@@ -58,7 +60,7 @@ export default class RwserveInterscribe {
 		this.background       = this.pluginConfig.background;
 		
 		// plugin variables
-		this.documentList = new DocumentList(this.hostname, this.snrfilterFile);
+		this.documentList = new DocumentList(this.hostname, this.snrfilterFile, this.snrGrades);
 		
     	Object.seal(this);
 	}
@@ -130,11 +132,16 @@ export default class RwserveInterscribe {
 			
 			// if this is the first time it's been requested, then it must be processed
 			if (!interscribePfile.exists()) {
+				var bCreated = false;
 				if (sourceFileExtension == 'blue')
-					this.interscribeProcess(dynamicPfile, interscribePfile);
+					bCreated = this.interscribeProcess(dynamicPfile, interscribePfile);
 				else //  (sourceFileExtension == 'html')
-					this.interscribeProcess(publicPfile, interscribePfile);
-				workOrder.addXHeader('rw-interscribe-cache-created');
+					bCreated = this.interscribeProcess(publicPfile, interscribePfile);
+				
+				if (bCreated)
+					workOrder.addXHeader('rw-interscribe-cache-created');
+				else
+					return;
 			}
 
 			// not the first time, check to see if it's expired
@@ -145,12 +152,16 @@ export default class RwserveInterscribe {
 				
 				// if the interscribe-cache file has expired, recreate it
 				if (interscribePfile.getModificationTime().valueOf() < cacheExpiration ) {
-					var sourceFileExtension = publicPfile.getExtension();
+					var bCreated = false;
 					if (sourceFileExtension == 'blue')
-						this.interscribeProcess(dynamicPfile, interscribePfile);
+						bCreated = this.interscribeProcess(dynamicPfile, interscribePfile);
 					else //  (sourceFileExtension == 'html')
-						this.interscribeProcess(publicPfile, interscribePfile);
-					workOrder.addXHeader('rw-interscribe-cache-recreated');
+						bCreated = this.interscribeProcess(publicPfile, interscribePfile);
+					
+					if (bCreated)
+						workOrder.addXHeader('rw-interscribe-cache-recreated');
+					else
+						return;
 				}
 				else {
 					workOrder.addXHeader('rw-interscribe-cache-used');
@@ -225,6 +236,8 @@ export default class RwserveInterscribe {
 	}
 	
 	// the work is done here
+	//< true if the intersrcribed file was created
+	//< false if the interscribed file was not created. Continue with the standard response processing sequence.
 	interscribeProcess(sourcePfile, interscribePfile) {
 		expect(sourcePfile, 'Pfile');
 		expect(interscribePfile, 'Pfile');
@@ -234,7 +247,7 @@ export default class RwserveInterscribe {
 			var resourceText = fs.readFileSync(sourcePfile.name, 'utf8');
 			var insertAt = resourceText.indexOf(this.insertionTarget);
 			if (insertAt == -1)
-				return;
+				return false;
 			
 			// insert text into resourceText completely replacing the insertionTarget text 
 			var index = this.documentList.incrementIndex();
@@ -250,9 +263,11 @@ export default class RwserveInterscribe {
 			
 			// save the patched contents to the interscribe cache
 			fs.writeFileSync(interscribePfile.name, payloadText, 'utf8');
+			return true;
 		}
 		catch (err) {
 			log.caught(err);
+			return false;
 		}
 	}
 }

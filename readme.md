@@ -8,6 +8,7 @@
 
 
 
+
 <figure>
 	<img src='/img/plugins/interscribe/cedalion-on-the-shoulder-of-orion.jpg' width='100%' />
 	<figcaption>Cedalion on the shoulder of Orion, ca. 1410, (artist unknown) </figcaption>
@@ -78,6 +79,7 @@ plugins {
             interscribe-cache   /srv/example.com/interscribe-cache
             cache-duration      86400
             snrfilter-file      /srv/example.com/etc/snrfilter
+            snr-grades            A,B,C,D
             insertion-target    < div id=interscribe-target>
             keep-target         before
             background          #777
@@ -97,8 +99,10 @@ plugins {
 	<dd>An absolute path to the directory to be used for caching the merged results. Typically this will be adjacent to the host's <code>public</code>, <code>dynamic-cache</code> and <code>encoding-cache</code> directories.</dd>
 	<dt><code>cache-duration</code></dt>
 	<dd>The time, in seconds, that the merged document should be kept in the cache before being recreated.</dd>
-	<dt><code>snrfilter</code></dt>
+	<dt><code>snrfilter-file</code></dt>
 	<dd>The absolute path to the file containing the references.</dd>
+	<dt><code>snr-grades</code></dt>
+	<dd>A comma-separated list of grades that are acceptable. Something like <code>A,B,C,D</code>. Document references in the <code>snrfilter-file</code> will be discarded if their <code>!snr:grade</code> is not one of these values.</dd>
 	<dt><code>insertion-target</code></dt>
 	<dd>The HTML text that is searched for, within the current document, and used as the target point. This text should be unique within the document. If it isn't, the first occurrence will be used.</dd>
 	<dt><code>keep-target</code></dt>

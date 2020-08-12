@@ -6,6 +6,7 @@
 !description The author decides it's time to update his job posting and hiring practice to reflect a new reality: “full stack” is no longer helping him to match job requirements with applicant skills.
 !rwt:title Full Stack Pronounced Dead
 !rwt:kicker Welcome 2020 Stack
+!snr:grade A
 !keywords 2020 stack,full stack,front-end,back-end,recruiting
 !topwords stack,2020,full,layers,pronounced,team,welcome,skills
 
@@ -16,6 +17,7 @@
 !description The journey from “full stack” to “2020 stack” has a few surprise winners and losers.
 !rwt:title My Perfect 2020 Stack
 !rwt:kicker A new full stack, for a new generation
+!snr:grade A
 !keywords 2020 stack,full stack,JavaScript,W3C components,Blue Phrase
 !topwords stack,2020,full,perfect,generation,server,javascript,winners
 
@@ -26,6 +28,7 @@
 !description [bluephrase · basics] This note will teach you the essentials necessary to effectively use BLUEPHRASE. And it will reveal shorthand techniques that allow you to perform commonly occurring tasks with greater ease.
 !rwt:title Getting Started with BLUEPHRASE - Mastering the essential concepts of shorthand notation
 !rwt:kicker The Basics of BLUEPHRASE
+!snr:grade B
 !keywords shorthand notation,distraction-free
 !topwords shorthand,bluephrase,notation,attributes,document,file,started,semantax
 
@@ -36,6 +39,7 @@
 !description [bluephrase · basics] How to write your first manuscript in minutes and where to get the BLUE PROCESSOR.
 !rwt:title Hello, World! - Learn how to use BLUEPHRASE in 3 minutes
 !rwt:kicker The Basics of BLUEPHRASE
+!snr:grade B
 !keywords hello world,distraction-free
 !topwords bluephrase,hello,world,minutes,basics,blue,learn,manuscript
 
@@ -46,6 +50,7 @@
 !description [bluephrase · basics] Never heard of BLUEPHRASE? Want to know what it's all about? Here's what you need to know.
 !rwt:title Shorthand Notation for Writers - Distraction-free authoring with smart tech for people who type
 !rwt:kicker The Basics of BLUEPHRASE
+!snr:grade B
 !keywords shorthand notation,distraction-free
 !topwords bluephrase,notation,shorthand,semantax,writers,basics,distraction,distraction-free
 
@@ -56,6 +61,7 @@
 !description In this episode Clarissa tries her hand at creating a dark mode style sheet, and finds out that it isn't just a black and white matter.
 !rwt:title Why Dark Mode Is Harder Than It Looks
 !rwt:kicker Achieving successful dark mode websites with just 8 pro tips
+!snr:grade C
 !keywords CSS,typography,black-and-white,dark mode,readability
 !topwords mode,dark,black,white,clarissa,color,harder,looks
 
@@ -66,6 +72,7 @@
 !description In this episode Ernesto discovers how HTTP/2 reduces the latency of request/response round-trips and increases overall throughput.
 !rwt:title Understanding the 4 Pillars of HTTP/2
 !rwt:kicker Persistent sessions, multiplexed streams, header compression, and prioritization
+!snr:grade C
 !keywords HTTP2,persistent sessions,multiplexed streams,header compression,prioritization
 !topwords http,header,persistent,prioritization,compression,multiplexed,sessions,streams
 
@@ -76,6 +83,7 @@
 !description In this episode Bjørne traces the path of a web page request and its dependencies when HTTP/2 speculative push is enabled. Caution: this article may cause premature aging, white hair, and memory loss.
 !rwt:title How Speculative Push with HTTP/2 Really Works
 !rwt:kicker Coming to grips with the 6 stages of server PUSH
+!snr:grade C
 !keywords speculative push,HTTP2,preload,pushtag,automatic preload detection
 !topwords push,http,speculative,server,request,resource,document
 
@@ -86,6 +94,7 @@
 !description [components · favorites] Give repeat visitors a way to save local pages to a website-specific list of favorites.
 !rwt:title Favorites
 !rwt:kicker Site-specific favorites dialog
+!snr:grade D
 !keywords components,favorites,local pages,website specific
 !topwords favorites,dialog,specific,component,software,site,site-specific
 
@@ -96,6 +105,7 @@
 !description [components · file-tabs] Switch between active views using a file-tab interface.
 !rwt:title File Tabs
 !rwt:kicker For multitasking UI/UX
+!snr:grade D
 !keywords components,file tab
 !topwords tabs,file,component,software,multitasking,installation,read,write
 
@@ -106,6 +116,7 @@
 !description [components · kanji] Designer card with a horizontal title, a vertically transformed subtitle, and text revealed when the mouse is over the card's image.
 !rwt:title “Kanji” Designer Card
 !rwt:kicker Discover and reveal text over image
+!snr:grade D
 !keywords components,kanji,reveal
 !topwords card,kanji,designer,image,text,component,software,reveal
 
@@ -116,6 +127,7 @@
 !description [crazy-cool · tl-dr] HTTP/2 server with modular JavaScript plugins — plus — all the goodies you know you want!
 !rwt:title TL;DR
 !rwt:kicker Too Long; Didn't Read
+!snr:grade D
 !keywords push prioritization,parti-homed hosting via SNI,information headers,stateful roles,MIME-type text/blue,HTTP/2,custom 404 error pages,Role Based Access Control,IP whitelisting/blacklisting,resource path mapping,JavaScript modules,Node.js handlers,SEO-friendly URL rewrites
 !topwords read,http,headers,javascript,server,write,modular,cool
 
@@ -126,6 +138,7 @@
 !description [requests · trace-method] This note provides supplementary information about the server's implementation of the standard HTTP TRACE method, used for troubleshooting resource requests.
 !rwt:title TRACE Method
 !rwt:kicker Debugging server resources
+!snr:grade D
 !keywords TRACE,debugging,troubleshooting,ping,sanitize headers,IETF RFC 7231
 !topwords trace,method,http,server,debugging,resources,request
 
@@ -136,5 +149,6 @@
 !description [installation · troubleshooting] This is a high performance tool, and like all such engineering efforts, you can get yourself into trouble when you try out new features. Here are some best practices to follow as you build out your server.
 !rwt:title Troubleshooting
 !rwt:kicker Best practices for configuring, monitoring, and extending
+!snr:grade D
 !keywords configuration syntax,modules,rwserve verify,information headers,logging,journalctl,permissions,SSL certificates,registration,developing plugins
 !topwords troubleshooting,best,practices,file,processing,server,configuring,extending

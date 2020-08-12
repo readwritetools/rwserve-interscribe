@@ -21,6 +21,7 @@ module.exports = class DocumentRef {
 		this.description = '';
 		this.rwtTitle = '';
 		this.rwtKicker = '';
+		this.snrGrade = '';
 		this.keywords = '';
 		this.topwords = '';
 		Object.seal(this);

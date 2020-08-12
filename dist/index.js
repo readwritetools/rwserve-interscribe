@@ -14,11 +14,12 @@
 		rwserve-interscribe {
 			location `/srv/rwserve-plugins/node_modules/rwserve-interscribe/dist/index.js`
 			config {
-				interscribe-cache   /srv/example.com/interscribe-cache
+				interscribe-cache   `/srv/example.com/interscribe-cache`
 				cache-duration      86400						// 1 day = 86400 = 24 * 60 * 60 (in seconds)
-				snrfilter-file      /palau/plugins.rwserve-interscribe/etc/blue-rwt-snrfilter
+				snrfilter-file      `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter`
+				snrfilter-restart   `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter-restart`
 				snr-grades			A,B,C,D						// one or more grades to accept
-				insertion-target    <div id=masthead>
+				insertion-target    <div id=interscribe-target>
 				keep-target			before						// before | after | discard
 				background			#777
 			}
@@ -51,29 +52,34 @@ module.exports = class RwserveInterscribe {
 		this.hostname         = hostConfig.hostname;
 		this.pluginConfig     = hostConfig.pluginsConfig.rwserveInterscribe;
 		this.pluginVersion    = this.pluginConfig.pluginVersion;		
-		this.interscribeCache = this.pluginConfig.interscribeCache;
 		this.snrGrades        = (this.pluginConfig.snrGrades == undefined) ? ['A', 'B', 'C', 'D'] : this.pluginConfig.snrGrades.split(',');
 		this.cacheDuration    = this.pluginConfig.cacheDuration;
-		this.snrfilterFile    = this.pluginConfig.snrfilterFile;
 		this.insertionTarget  = this.pluginConfig.insertionTarget;
 		this.keepTarget       = this.pluginConfig.keepTarget;
 		this.background       = this.pluginConfig.background;
+
+		this.interscribeCache = this.pluginConfig.interscribeCache.hasAttribute('sourceref') ? this.pluginConfig.interscribeCache.getAttribute('sourceref') : '';
+		if (this.interscribeCache == '')
+			this.logConfig(`RwserveInterscribe interscribe-cache must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/interscribe-cache')`);
+
+		this.snrfilterFile = this.pluginConfig.snrfilterFile.hasAttribute('sourceref') ? this.pluginConfig.snrfilterFile.getAttribute('sourceref') : '';
+		if (this.snrfilterFile == '')
+			this.logConfig(`RwserveInterscribe snrfilter-file must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-file')`);
+
+		this.snrfilterRestart = this.pluginConfig.snrfilterRestart.hasAttribute('sourceref') ? this.pluginConfig.snrfilterRestart.getAttribute('sourceref') : '';
+		if (this.snrfilterRestart == '')
+			this.logConfig(`RwserveInterscribe snrfilter-restart must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-restart')`);
 		
 		// plugin variables
-		this.documentList = new DocumentList(this.hostname, this.snrfilterFile, this.snrGrades);
+		this.documentList = new DocumentList(this);
 		
     	Object.seal(this);
 	}
 	
 	async startup() {
-		log.debug('RwserveInterscribe', `version ${this.pluginVersion}; © 2020 Read Write Tools; MIT License`); 
+		this.logConfig(`RwserveInterscribe version ${this.pluginVersion}; © 2020 Read Write Tools; MIT License`); 
 		
-		if (this.interscribeCache === undefined || this.interscribeCache == '')
-			log.config(`RwserveInterscribe plugin missing 'interscribe-cache' definition`);
-		
-		var pfile = new Pfile(this.interscribeCache);
-		if (!pfile.exists())
-			log.config(`RwserveInterscribe plugin 'interscribe-cache' does not exist '${this.interscribeCache}'`);
+		this.verifyInterscribeCache();
 		
 		try {
 			this.documentList.readSnrfilter();
@@ -90,6 +96,34 @@ module.exports = class RwserveInterscribe {
 		// Save the current document list index for the next restart 
 		this.documentList.saveRestartIndex();
 	}
+
+	
+	// only display config messages for the first cluster worker
+	logConfig(msg) {
+		if (this.pluginConfig.applyVerificationRules == true)
+			log.config(msg); 
+	}
+	
+	verifyInterscribeCache() {		
+		if (this.interscribeCache === undefined || this.interscribeCache == '') {
+			this.logConfig(`RwserveInterscribe missing 'interscribe-cache' definition`);
+			return;
+		}		
+		var pfile = new Pfile(this.interscribeCache);
+		if (!pfile.exists()) {
+			this.logConfig(`RwserveInterscribe 'interscribe-cache' does not exist '${this.interscribeCache}'`);
+			return;
+		}		
+		if (!pfile.isReadable()) {
+			log.config(`RwserveInterscribe interscribe-cache read permission denied '${this.interscribeCache}' (configuration: 'plugins/rwserve-interscribe/config/interscribe-cache')`);
+			return;
+		}
+		if (!pfile.isWritable()) {
+			log.config(`RwserveInterscribe interscribe-cache write permission denied '${this.interscribeCache}' (configuration: 'plugins/rwserve-interscribe/config/interscribe-cache')`);
+			return;
+		}
+	}
+
 	
 	async processingSequence(workOrder) {
 		

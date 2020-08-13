@@ -8,11 +8,11 @@ $DOCUMENTS-PATH='/srv/rwserve/configuration-docs'
 server {
 	ip-address   127.0.0.1
 	port         7443
-	cluster-size 1
+	cluster-size 2
 	
 	registration {
-		customer-number CN-UNREGISTERED
-		access-key      AK-UNREGISTERED
+		customer-number CN-aaa-bbbbb //CN-UNREGISTERED
+		access-key      AK-xxx-eeeee //AK-UNREGISTERED
 	}
 
 	modules {

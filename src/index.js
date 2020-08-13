@@ -43,10 +43,10 @@ import fs					from 'fs';
 import DocumentList			from './document-list.class.js';
 import DocumentRef			from './document-ref.class.js';
 
+
 export default class RwserveInterscribe {
 
 	constructor(hostConfig) {
-		
 		// config variables
 		this.hostConfig       = hostConfig;
 		this.hostname         = hostConfig.hostname;
@@ -58,17 +58,17 @@ export default class RwserveInterscribe {
 		this.keepTarget       = this.pluginConfig.keepTarget;
 		this.background       = this.pluginConfig.background;
 
-		this.interscribeCache = this.pluginConfig.interscribeCache.hasAttribute('sourceref') ? this.pluginConfig.interscribeCache.getAttribute('sourceref') : '';
-		if (this.interscribeCache == '')
-			this.logConfig(`RwserveInterscribe interscribe-cache must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/interscribe-cache')`);
+		this.interscribeCache = (this.pluginConfig.interscribeCache) ? this.pluginConfig.interscribeCache.sourceref : '';
+		if (this.interscribeCache == undefined || this.interscribeCache == '')
+			log.config(`RwserveInterscribe interscribe-cache must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/interscribe-cache')`);
 
-		this.snrfilterFile = this.pluginConfig.snrfilterFile.hasAttribute('sourceref') ? this.pluginConfig.snrfilterFile.getAttribute('sourceref') : '';
-		if (this.snrfilterFile == '')
-			this.logConfig(`RwserveInterscribe snrfilter-file must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-file')`);
+		this.snrfilterFile = (this.pluginConfig.snrfilterFile) ? this.pluginConfig.snrfilterFile.sourceref : '';
+		if (this.snrfilterFile == undefined || this.snrfilterFile == '')
+			log.config(`RwserveInterscribe snrfilter-file must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-file')`);
 
-		this.snrfilterRestart = this.pluginConfig.snrfilterRestart.hasAttribute('sourceref') ? this.pluginConfig.snrfilterRestart.getAttribute('sourceref') : '';
-		if (this.snrfilterRestart == '')
-			this.logConfig(`RwserveInterscribe snrfilter-restart must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-restart')`);
+		this.snrfilterRestart = (this.pluginConfig.snrfilterRestart) ? this.pluginConfig.snrfilterRestart.sourceref : '';
+		if (this.snrfilterRestart == undefined || this.snrfilterRestart == '')
+			log.config(`RwserveInterscribe snrfilter-restart must be enclosed in grave-accents (configuration: 'plugins/rwserve-interscribe/config/snrfilter-restart')`);
 		
 		// plugin variables
 		this.documentList = new DocumentList(this);
@@ -77,7 +77,7 @@ export default class RwserveInterscribe {
 	}
 	
 	async startup() {
-		this.logConfig(`RwserveInterscribe version ${this.pluginVersion}; © 2020 Read Write Tools; MIT License`); 
+		log.config(`RwserveInterscribe version ${this.pluginVersion}; © 2020 Read Write Tools; MIT License`); 
 		
 		this.verifyInterscribeCache();
 		
@@ -96,22 +96,15 @@ export default class RwserveInterscribe {
 		// Save the current document list index for the next restart 
 		this.documentList.saveRestartIndex();
 	}
-
-	
-	// only display config messages for the first cluster worker
-	logConfig(msg) {
-		if (this.pluginConfig.applyVerificationRules == true)
-			log.config(msg); 
-	}
 	
 	verifyInterscribeCache() {		
 		if (this.interscribeCache === undefined || this.interscribeCache == '') {
-			this.logConfig(`RwserveInterscribe missing 'interscribe-cache' definition`);
+			log.config(`RwserveInterscribe missing 'interscribe-cache' definition`);
 			return;
 		}		
 		var pfile = new Pfile(this.interscribeCache);
 		if (!pfile.exists()) {
-			this.logConfig(`RwserveInterscribe 'interscribe-cache' does not exist '${this.interscribeCache}'`);
+			log.config(`RwserveInterscribe 'interscribe-cache' does not exist '${this.interscribeCache}'`);
 			return;
 		}		
 		if (!pfile.isReadable()) {
@@ -123,10 +116,8 @@ export default class RwserveInterscribe {
 			return;
 		}
 	}
-
 	
-	async processingSequence(workOrder) {
-		
+	async processingSequence(workOrder) {		
 		// Immediately upon arrival here check for problems discovered in the requestHandler
 		if (workOrder.doNotFulfill == true)
 	    	return;

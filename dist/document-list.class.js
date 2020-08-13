@@ -26,13 +26,14 @@ module.exports = class DocumentList {
 		expect(rwserveInterscribe.snrfilterFile, 'String');
     	expect(rwserveInterscribe.snrGrades, 'Array');
 		
-		this.hostname = rwserveInterscribe.hostname;
-		this.snrfilterFile = new Pfile(rwserveInterscribe.snrfilterFile);
-		if (rwserveInterscribe.snrfilterRestart != '')
-			this.snrfilterRestart = new Pfile(rwserveInterscribe.snrfilterRestart);
+    	this.rwserveInterscribe = rwserveInterscribe;
+		this.hostname = this.rwserveInterscribe.hostname;
+		this.snrfilterFile = new Pfile(this.rwserveInterscribe.snrfilterFile);
+		if (this.rwserveInterscribe.snrfilterRestart != '')
+			this.snrfilterRestart = new Pfile(this.rwserveInterscribe.snrfilterRestart);
 		else
 			this.snrfilterRestart = new Pfile(this.snrfilterFile.getPath()).addPath('snrfilter-index');
-		this.snrGrades = rwserveInterscribe.snrGrades;
+		this.snrGrades = this.rwserveInterscribe.snrGrades;
 
 		this.countTotal = 0;				// number of document refs in snrfilterFile
 		this.countKeep = 0;					// number of document refs kept
@@ -88,7 +89,7 @@ module.exports = class DocumentList {
 	    	}
 	    	else
 	    		this.nextIndex = -1;
-			rwserveInterscribe.logConfig(`RwserveInterscribe ${this.hostname} restarting at index ${this.nextIndex}`);
+			log.config(`RwserveInterscribe ${this.hostname} restarting at index ${this.nextIndex}`);
 		}
 		catch(err) {
 			log.caught(err);
@@ -98,7 +99,7 @@ module.exports = class DocumentList {
     saveRestartIndex() {
     	try {
     		fs.writeFileSync(this.snrfilterRestart.name, `${this.nextIndex}`, 'utf8');
-			rwserveInterscribe.logConfig(`RwserveInterscribe ${this.hostname} stopping at index ${this.nextIndex}`);
+			log.config(`RwserveInterscribe ${this.hostname} stopping at index ${this.nextIndex}`);
     	}
     	catch(err) {
     		log.caught(err);
@@ -108,7 +109,7 @@ module.exports = class DocumentList {
     // Read the snrfilterFile created by SNRFILTER
     readSnrfilter() {
     	if (!this.snrfilterFile.exists()) {
-    		rwserveInterscribe.logConfig(`RwserveInterscribe snrfilter file ${this.snrfilterFile.name} not found`);
+    		log.config(`RwserveInterscribe snrfilter file ${this.snrfilterFile.name} not found`);
     		return;
     	}
 
@@ -188,7 +189,7 @@ module.exports = class DocumentList {
     	}
     	tr.close();
     	var discarded = this.countTotal - this.countKeep;
-		rwserveInterscribe.logConfig(`RwserveInterscribe ${this.hostname} ${this.countKeep} references kept, ${discarded} discarded`);
+		log.config(`RwserveInterscribe ${this.hostname} ${this.countKeep} references kept, ${discarded} discarded`);
     	return;
     }
 }

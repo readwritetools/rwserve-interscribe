@@ -80,6 +80,7 @@ module.exports = class RwserveInterscribe {
 		log.config(`RwserveInterscribe version ${this.pluginVersion}; © 2020 Read Write Tools; MIT License`); 
 		
 		this.verifyInterscribeCache();
+		this.verifyFilterRestart();
 		
 		try {
 			this.documentList.readSnrfilter();
@@ -116,6 +117,27 @@ module.exports = class RwserveInterscribe {
 			return;
 		}
 	}
+	
+	verifyFilterRestart() {
+		if (this.snrfilterRestart === undefined || this.snrfilterRestart == '') {
+			log.config(`RwserveInterscribe missing 'snrfilter-restart' definition`);
+			return;
+		}		
+		var pfile = new Pfile(this.snrfilterRestart);
+		if (!pfile.exists()) {
+			log.config(`RwserveInterscribe 'snrfilter-restart' does not exist '${this.snrfilterRestart}'`);
+			return;
+		}		
+		if (!pfile.isReadable()) {
+			log.config(`RwserveInterscribe snrfilter-restart read permission denied '${this.snrfilterRestart}' (configuration: 'plugins/rwserve-interscribe/config/snrfilter-restart')`);
+			return;
+		}
+		if (!pfile.isWritable()) {
+			log.config(`RwserveInterscribe snrfilter-restart write permission denied '${this.snrfilterRestart}' (configuration: 'plugins/rwserve-interscribe/config/snrfilter-restart')`);
+			return;
+		}
+	}
+
 	
 	async processingSequence(workOrder) {		
 		// Immediately upon arrival here check for problems discovered in the requestHandler

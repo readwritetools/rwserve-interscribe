@@ -30,7 +30,7 @@ export default class DocumentRef {
 	//< the HTML string to insert
 	assembleInsertionText(background) {
 		var h2Words = DocumentRef.wordsAsString(this.topwords, 0, 2);
-		var h3Words = DocumentRef.wordsAsString(this.topwords, 3, 5);
+		var h3Words = DocumentRef.wordsAsString(this.topwords, 2, 5);
 		var dtWords = DocumentRef.wordsAsString(this.keywords, 0, 1);
 		var rwtKicker = this.rwtKicker.replace("'", "");
 		

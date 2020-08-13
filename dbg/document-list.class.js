@@ -39,7 +39,7 @@ module.exports = class DocumentList {
 		this.countKeep = 0;					// number of document refs kept
 		this.documentList = new Array();
 		this.currentDocumentRef = null;		// used when reading the snrfilter file
-		this.nextIndex = -1;				// used when cycling through the list
+		this.nextIndex = -1;					// used when cycling through the list
 		
     	Object.seal(this);
 	}
@@ -54,7 +54,6 @@ module.exports = class DocumentList {
     // Create a new document ref, and make it "current"
     createDocumentRef() {
 		this.currentDocumentRef = new DocumentRef();
-		this.documentList.push(this.currentDocumentRef);
     }
     
     // Call this routine whenever !host or !snr:grade is parsed.

@@ -311,6 +311,11 @@ export default class RwserveInterscribe {
 							+ after
 							+ resourceText.substr(insertAt + this.insertionTarget.length);
 			
+			// mkDir
+			var pathPfile = new Pfile(interscribePfile.getPath());
+			if (!pathPfile.exists())
+				pathPfile.mkDir();
+			
 			// save the patched contents to the interscribe cache
 			fs.writeFileSync(interscribePfile.name, payloadText, 'utf8');
 			return true;

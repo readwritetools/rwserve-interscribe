@@ -11,8 +11,8 @@ server {
 	cluster-size 2
 	
 	registration {
-		customer-number CN-aaa-bbbbb //CN-UNREGISTERED
-		access-key      AK-xxx-eeeee //AK-UNREGISTERED
+		customer-number CN-UNREGISTERED
+		access-key      AK-UNREGISTERED
 	}
 
 	modules {
@@ -23,7 +23,7 @@ server {
 	}
 	
 	cache-control {
-        `*.html`           *instructions='no-cache, no-store, must-revalidate'
+        `*.html`           *instructions='public, max-age=300'
         `*.css`            *instructions='public, max-age=86400'
         `*.js`             *instructions='public, max-age=86400'
         `/favicon.ico`     *instructions='public, max-age=7776000'
@@ -79,11 +79,11 @@ host {
 			location `$PLUGIN-PATH`
 			config {
 				interscribe-cache   `/srv/rwserve/configuration-docs/interscribe-cache`
-				cache-duration      60 // 86400
+				cache-duration      300
 				snrfilter-file      `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter`
 				snrfilter-restart   `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter-restart`
 				snr-score-min		4
-				insertion-target    </body> //<div id=interscribe-target>
+				insertion-target    </body>
 				keep-target			after
 				background			#777
 			}

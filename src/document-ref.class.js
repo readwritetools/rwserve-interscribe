@@ -21,18 +21,17 @@ export default class DocumentRef {
 		this.description = '';
 		this.rwtTitle = '';
 		this.rwtKicker = '';
-		this.snrGrade = '';
-		this.keywords = '';
-		this.topwords = '';
+		this.bestwords = '';
+		this.snrScore = null;
 		Object.seal(this);
     }
- 
+	
 	//< the HTML string to insert
 	assembleInsertionText(background) {
-		var h2Words = DocumentRef.wordsAsString(this.topwords, 0, 2);
-		var h3Words = DocumentRef.wordsAsString(this.topwords, 2, 5);
-		var dtWords = DocumentRef.wordsAsString(this.keywords, 0, 1);
 		var rwtKicker = this.rwtKicker.replace("'", "");
+		var h2Words = DocumentRef.wordsAsString(this.bestwords, 0, 2);	// [0], [1]
+		var h3Words = DocumentRef.wordsAsString(this.bestwords, 2, 5);	// [2], [3], [4]
+		var dtWords = DocumentRef.wordsAsString(this.bestwords, 5, 7);	// [5], [6]
 		
 		return `
 		<script src='/node_modules/rwt-newton/rwt-newton.js' type=module></script>

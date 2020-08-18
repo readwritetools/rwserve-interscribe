@@ -24,7 +24,7 @@ module.exports = class DocumentList {
 		expect(rwserveInterscribe, 'RwserveInterscribe');
 		expect(rwserveInterscribe.hostname, 'String');
 		expect(rwserveInterscribe.snrfilterFile, 'String');
-    	expect(rwserveInterscribe.snrGrades, 'Array');
+    	expect(rwserveInterscribe.snrScoreMin, 'Number');
 		
     	this.rwserveInterscribe = rwserveInterscribe;
 		this.hostname = this.rwserveInterscribe.hostname;
@@ -32,21 +32,30 @@ module.exports = class DocumentList {
 		if (this.rwserveInterscribe.snrfilterRestart != '')
 			this.snrfilterRestart = new Pfile(this.rwserveInterscribe.snrfilterRestart);
 		else
-			this.snrfilterRestart = new Pfile(this.snrfilterFile.getPath()).addPath('snrfilter-index');
-		this.snrGrades = this.rwserveInterscribe.snrGrades;
-
+			this.snrfilterRestart = new Pfile(this.snrfilterFile.getPath()).addPath('snrfilter-restart');
+		this.snrScoreMin = this.rwserveInterscribe.snrScoreMin;
+		
 		this.countTotal = 0;				// number of document refs in snrfilterFile
 		this.countKeep = 0;					// number of document refs kept
 		this.documentList = new Array();
 		this.currentDocumentRef = null;		// used when reading the snrfilter file
-		this.nextIndex = -1;					// used when cycling through the list
+		this.nextIndex = -1;				// used when cycling through the list
 		
     	Object.seal(this);
 	}
 	
+	//< on failure return -1
+	//< on success return a valid index
 	incrementIndex() {
+		if (this.documentList.length == 0)
+			return -1;
+		if (Number.isNaN(this.nextIndex))
+			return -1;
+		
 		this.nextIndex++;
-		if (this.nextIndex >= this.documentList.length)
+		if (this.nextIndex < 0)							// just in case
+			this.nextIndex = 0;
+		if (this.nextIndex >= this.documentList.length) // rollover
 			this.nextIndex = 0;
 		return this.nextIndex;
 	}
@@ -56,23 +65,23 @@ module.exports = class DocumentList {
 		this.currentDocumentRef = new DocumentRef();
     }
     
-    // Call this routine whenever !host or !snr:grade is parsed.
+    // Call this routine whenever !host or !snrScore is parsed.
     // Push the document to the list only when both values have been parsed, and only if:
     //   the host is not this host
-    //   the snrGrade is acceptable
+    //   the snrScore meets the minimum required value
     conditionalKeepDoc() {
     	// wait for both values to be parsed . . .
     	if (this.currentDocumentRef.host == '')
     		return;
-    	if (this.currentDocumentRef.snrGrade == '')
+    	if (this.currentDocumentRef.snrScore == null)
     		return;
     	
     	// we only want to keep document refs to external hosts
 		if (this.currentDocumentRef.host == this.hostname)
 			return;
 
-		// we only want to keep document refs if they have an SNR grade that's specified in the configured list
-		if (!this.snrGrades.includes(this.currentDocumentRef.snrGrade))
+		// we only want to keep document refs if they have an SNR score that meets the minimum
+		if (this.currentDocumentRef.snrScore < this.snrScoreMin)
 			return;
 		
 	    this.documentList.push(this.currentDocumentRef);
@@ -85,6 +94,8 @@ module.exports = class DocumentList {
     		if (this.snrfilterRestart.exists()) {
 	    		var num = fs.readFileSync(this.snrfilterRestart.name, 'utf8');
 	    		this.nextIndex = parseInt(num);
+	    		if (Number.isNaN(this.nextIndex))
+	    			this.nextIndex = -1;
 	    	}
 	    	else
 	    		this.nextIndex = -1;
@@ -168,19 +179,25 @@ module.exports = class DocumentList {
 	    				this.currentDocumentRef.rwtKicker = value;
 	    				break;
 	    				
-	    			case '!snr:grade':
-	    				this.currentDocumentRef.snrGrade = value;
-    					this.conditionalKeepDoc();
-	    				break;
-	    				
-	    			case '!keywords':
-	    				this.currentDocumentRef.keywords = value;
-	    				break;
-	    				
-	    			case '!topwords':
-	    				this.currentDocumentRef.topwords = value;
+	    			case '!bestwords':
+	    				this.currentDocumentRef.bestwords = value;
 	    				break;
     				
+	    			case '!snrScore':
+	    				this.currentDocumentRef.snrScore = parseInt(value);
+    					this.conditionalKeepDoc();
+	    				break;
+    				
+	    			case '!snr:grade':
+	    			case '!keywords':
+	    			case '!topwords':
+	    			case '!neowords':
+	    			case '!techwords':
+	    			case '!seowords':
+	    			case '!keywords':
+	    			case '!keywords':
+	    				break;
+	    				
     				default:
     					log.error(`Unexpected meta data ${keyword}=${value} in ${snrfilterFile}`);
     			}

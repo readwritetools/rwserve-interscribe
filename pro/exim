@@ -35,6 +35,13 @@ copy {
 	overwrite older
 }
 
+// ---------- copy etc/data to srv/rwserve-plugin for in-place testing ---------- 
+copy {
+	source    '../etc/data'
+	dest      '/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data'
+	overwrite older
+}
+
 // ---------- copy package.json to srv/rwserve-plugin for in-place testing ---------- 
 copy {
 	source    '../package.json'

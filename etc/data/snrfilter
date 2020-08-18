@@ -6,9 +6,14 @@
 !description The author decides it's time to update his job posting and hiring practice to reflect a new reality: “full stack” is no longer helping him to match job requirements with applicant skills.
 !rwt:title Full Stack Pronounced Dead
 !rwt:kicker Welcome 2020 Stack
-!snr:grade A
+!snr:grade C
 !keywords 2020 stack,full stack,front-end,back-end,recruiting
-!topwords stack,2020,full,layers,pronounced,team,welcome,skills
+!topwords stack,full,layers,pronounced,team,welcome,skills,applicant
+!neowords 
+!techwords 
+!seowords 
+!bestwords layers,pronounced,team,welcome,skills,applicant,2020 stack,full stack,front-end,back-end,recruiting
+!snrScore 4
 
 !url https://2020stack.com/2020-002.blue
 !host 2020stack.com
@@ -17,9 +22,30 @@
 !description The journey from “full stack” to “2020 stack” has a few surprise winners and losers.
 !rwt:title My Perfect 2020 Stack
 !rwt:kicker A new full stack, for a new generation
-!snr:grade A
-!keywords 2020 stack,full stack,JavaScript,W3C components,Blue Phrase
-!topwords stack,2020,full,perfect,generation,server,javascript,winners
+!snr:grade C
+!keywords 2020 stack,full stack,javascript,w3c components,blue phrase
+!topwords stack,full,perfect,generation,javascript,server,winners,losers
+!neowords 
+!techwords 
+!seowords 
+!bestwords perfect,generation,javascript,server,winners,losers,2020 stack,full stack,w3c components,blue phrase
+!snrScore 4
+
+!url https://2020stack.com/2020-004.blue
+!host 2020stack.com
+!lastmod 2020-01-13
+!title With ES Modules and HTTP/2 You May Not Need Webpack Anymore - It's time to fully embrace import/export | 2020 Stack
+!description With JavaScript modules fully supported in every major browser, savvy developers can deliver production-ready apps without bundlers.
+!rwt:title With ES Modules and HTTP/2 You May Not Need Webpack Anymore
+!rwt:kicker It's time to fully embrace import/export
+!snr:grade C
+!keywords 2020 stack,javascript,bundler,webpack,frontend,chromium edge
+!topwords modules,HTTP,HTTP/2,time,webpack,export,import,javascript
+!neowords 
+!techwords 
+!seowords 
+!bestwords modules,HTTP,HTTP/2,time,webpack,export,import,javascript,2020 stack,bundler,frontend,chromium edge
+!snrScore 4
 
 !url https://bluephrase.com/basics/getting-started-with-blue-phrase.blue
 !host bluephrase.com
@@ -28,9 +54,14 @@
 !description [bluephrase · basics] This note will teach you the essentials necessary to effectively use BLUEPHRASE. And it will reveal shorthand techniques that allow you to perform commonly occurring tasks with greater ease.
 !rwt:title Getting Started with BLUEPHRASE - Mastering the essential concepts of shorthand notation
 !rwt:kicker The Basics of BLUEPHRASE
-!snr:grade B
+!snr:grade C
 !keywords shorthand notation,distraction-free
-!topwords shorthand,bluephrase,notation,attributes,document,file,started,semantax
+!topwords BLUEPHRASE,shorthand notation,attributes,document,file,started
+!neowords 
+!techwords 
+!seowords 
+!bestwords BLUEPHRASE,shorthand notation,attributes,document,file,started,distraction-free
+!snrScore 2
 
 !url https://bluephrase.com/basics/hello-world.blue
 !host bluephrase.com
@@ -39,9 +70,14 @@
 !description [bluephrase · basics] How to write your first manuscript in minutes and where to get the BLUE PROCESSOR.
 !rwt:title Hello, World! - Learn how to use BLUEPHRASE in 3 minutes
 !rwt:kicker The Basics of BLUEPHRASE
-!snr:grade B
+!snr:grade C
 !keywords hello world,distraction-free
-!topwords bluephrase,hello,world,minutes,basics,blue,learn,manuscript
+!topwords BLUEPHRASE,hello,world,minutes,basics,blue,learn,manuscript
+!neowords BLUEPHRASE,BLUE PROCESSOR
+!techwords 
+!seowords manuscript
+!bestwords BLUEPHRASE,BLUE PROCESSOR,manuscript,minutes,basics,learn,hello world,distraction-free
+!snrScore 4
 
 !url https://bluephrase.com/basics/shorthand-notation-for-writers.blue
 !host bluephrase.com
@@ -50,105 +86,44 @@
 !description [bluephrase · basics] Never heard of BLUEPHRASE? Want to know what it's all about? Here's what you need to know.
 !rwt:title Shorthand Notation for Writers - Distraction-free authoring with smart tech for people who type
 !rwt:kicker The Basics of BLUEPHRASE
-!snr:grade B
+!snr:grade C
 !keywords shorthand notation,distraction-free
-!topwords bluephrase,notation,shorthand,semantax,writers,basics,distraction,distraction-free
+!topwords shorthand notation,BLUEPHRASE,semantax,writers,basics,distraction
+!neowords BLUEPHRASE,semantax
+!techwords shorthand notation
+!seowords distraction-free
+!bestwords BLUEPHRASE,semantax,shorthand notation,distraction-free,writers,basics
+!snrScore 7
 
-!url https://grok.readwritetools.com/tws-012.blue
-!host grok.readwritetools.com
-!lastmod 2019-11-11
-!title Why Dark Mode Is Harder Than It Looks - Achieving successful dark mode websites with just 8 pro tips | Read Write Grok
-!description In this episode Clarissa tries her hand at creating a dark mode style sheet, and finds out that it isn't just a black and white matter.
-!rwt:title Why Dark Mode Is Harder Than It Looks
-!rwt:kicker Achieving successful dark mode websites with just 8 pro tips
-!snr:grade C
-!keywords CSS,typography,black-and-white,dark mode,readability
-!topwords mode,dark,black,white,clarissa,color,harder,looks
-
-!url https://grok.readwritetools.com/tws-013.blue
-!host grok.readwritetools.com
-!lastmod 2019-11-11
-!title Understanding the 4 Pillars of HTTP/2 - Persistent sessions, multiplexed streams, header compression, and prioritization | Read Write Grok
-!description In this episode Ernesto discovers how HTTP/2 reduces the latency of request/response round-trips and increases overall throughput.
-!rwt:title Understanding the 4 Pillars of HTTP/2
-!rwt:kicker Persistent sessions, multiplexed streams, header compression, and prioritization
-!snr:grade C
-!keywords HTTP2,persistent sessions,multiplexed streams,header compression,prioritization
-!topwords http,header,persistent,prioritization,compression,multiplexed,sessions,streams
-
-!url https://grok.readwritetools.com/tws-014.blue
-!host grok.readwritetools.com
+!url https://doppelmarks.com/assembling.blue
+!host doppelmarks.com
 !lastmod 2020-07-30
-!title How Speculative Push with HTTP/2 Really Works - Coming to grips with the 6 stages of server PUSH | Read Write Grok
-!description In this episode Bjørne traces the path of a web page request and its dependencies when HTTP/2 speculative push is enabled. Caution: this article may cause premature aging, white hair, and memory loss.
-!rwt:title How Speculative Push with HTTP/2 Really Works
-!rwt:kicker Coming to grips with the 6 stages of server PUSH
+!title Assembling - Bringing the pieces together | Doppelmarks
+!description When your writing project becomes involved, it's often convenient to split it into sections, each saved to a separate file.
+!rwt:title Assembling
+!rwt:kicker Bringing the pieces together
 !snr:grade C
-!keywords speculative push,HTTP2,preload,pushtag,automatic preload detection
-!topwords push,http,speculative,server,request,resource,document
+!keywords include pragma
+!topwords assembling,pieces,bringing,together,file,project,convenient,doppelmarks
+!neowords 
+!techwords include
+!seowords writing
+!bestwords assembling,writing,pieces,bringing,together,file,project,convenient,doppelmarks,include pragma
+!snrScore 6
 
-!url https://hub.readwritetools.com/components/favorites.blue
-!host hub.readwritetools.com
-!lastmod 2019-12-31
-!title Favorites - Site-specific favorites dialog | Read Write Hub
-!description [components · favorites] Give repeat visitors a way to save local pages to a website-specific list of favorites.
-!rwt:title Favorites
-!rwt:kicker Site-specific favorites dialog
-!snr:grade D
-!keywords components,favorites,local pages,website specific
-!topwords favorites,dialog,specific,component,software,site,site-specific
+!url https://doppelmarks.com/content-authoring.blue
+!host doppelmarks.com
+!lastmod 2020-01-22
+!title Content Authoring - Stay focused on your composition | Doppelmarks
+!description Too often our attempts to compose something meaningful is blocked by superficial eye-candy. A distraction-free writing tool can help you stay focused on your composition, regardless of whether you're writing something technical, or blogging to expand your market, or wireframing your next web app.
+!rwt:title Content Authoring
+!rwt:kicker Stay focused on your composition
+!snr:grade C
+!keywords authoring,documenting,blogging,wireframing,writing
+!topwords composition,focused,stay,content authoring,writing,distraction
+!neowords 
+!techwords 
+!seowords content authoring,writing
+!bestwords content authoring,writing,composition,focused,stay,distraction,documenting,blogging,wireframing
+!snrScore 3
 
-!url https://hub.readwritetools.com/components/file-tabs.blue
-!host hub.readwritetools.com
-!lastmod 2020-05-05
-!title File Tabs - For multitasking UI/UX | Read Write Hub
-!description [components · file-tabs] Switch between active views using a file-tab interface.
-!rwt:title File Tabs
-!rwt:kicker For multitasking UI/UX
-!snr:grade D
-!keywords components,file tab
-!topwords tabs,file,component,software,multitasking,installation,read,write
-
-!url https://hub.readwritetools.com/components/kanji.blue
-!host hub.readwritetools.com
-!lastmod 2020-04-25
-!title “Kanji” Designer Card - Discover and reveal text over image | Read Write Hub
-!description [components · kanji] Designer card with a horizontal title, a vertically transformed subtitle, and text revealed when the mouse is over the card's image.
-!rwt:title “Kanji” Designer Card
-!rwt:kicker Discover and reveal text over image
-!snr:grade D
-!keywords components,kanji,reveal
-!topwords card,kanji,designer,image,text,component,software,reveal
-
-!url https://rwserve.readwritetools.com/tl-dr.blue
-!host rwserve.readwritetools.com
-!lastmod 2020-01-23
-!title TL;DR - Too Long; Didn't Read | Read Write Serve
-!description [crazy-cool · tl-dr] HTTP/2 server with modular JavaScript plugins — plus — all the goodies you know you want!
-!rwt:title TL;DR
-!rwt:kicker Too Long; Didn't Read
-!snr:grade D
-!keywords push prioritization,parti-homed hosting via SNI,information headers,stateful roles,MIME-type text/blue,HTTP/2,custom 404 error pages,Role Based Access Control,IP whitelisting/blacklisting,resource path mapping,JavaScript modules,Node.js handlers,SEO-friendly URL rewrites
-!topwords read,http,headers,javascript,server,write,modular,cool
-
-!url https://rwserve.readwritetools.com/trace-method.blue
-!host rwserve.readwritetools.com
-!lastmod 2020-01-23
-!title TRACE Method - Debugging server resources | Read Write Serve
-!description [requests · trace-method] This note provides supplementary information about the server's implementation of the standard HTTP TRACE method, used for troubleshooting resource requests.
-!rwt:title TRACE Method
-!rwt:kicker Debugging server resources
-!snr:grade D
-!keywords TRACE,debugging,troubleshooting,ping,sanitize headers,IETF RFC 7231
-!topwords trace,method,http,server,debugging,resources,request
-
-!url https://rwserve.readwritetools.com/troubleshooting.blue
-!host rwserve.readwritetools.com
-!lastmod 2020-02-09
-!title Troubleshooting - Best practices for configuring, monitoring, and extending | Read Write Serve
-!description [installation · troubleshooting] This is a high performance tool, and like all such engineering efforts, you can get yourself into trouble when you try out new features. Here are some best practices to follow as you build out your server.
-!rwt:title Troubleshooting
-!rwt:kicker Best practices for configuring, monitoring, and extending
-!snr:grade D
-!keywords configuration syntax,modules,rwserve verify,information headers,logging,journalctl,permissions,SSL certificates,registration,developing plugins
-!topwords troubleshooting,best,practices,file,processing,server,configuring,extending

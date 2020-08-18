@@ -16,7 +16,7 @@
 
 # Interscribe
 
-## Shoulders of giants
+## RWSERVE plugin - Shoulders of giants
 
 
 <address>
@@ -80,7 +80,7 @@ plugins {
             interscribe-cache   /srv/example.com/interscribe-cache
             cache-duration      86400
             snrfilter-file      /srv/example.com/etc/snrfilter
-            snr-grades            A,B,C,D
+            snr-score-min       4
             insertion-target    < div id=interscribe-target>
             keep-target         before
             background          #777
@@ -102,8 +102,8 @@ plugins {
 	<dd>The time, in seconds, that the merged document should be kept in the cache before being recreated.</dd>
 	<dt><code>snrfilter-file</code></dt>
 	<dd>The absolute path to the file containing the references.</dd>
-	<dt><code>snr-grades</code></dt>
-	<dd>A comma-separated list of grades that are acceptable. Something like <code>A,B,C,D</code>. Document references in the <code>snrfilter-file</code> will be discarded if their <code>!snr:grade</code> is not one of these values.</dd>
+	<dt><code>snr-score-min</code></dt>
+	<dd>The minimum <code>snrScore</code> that must be met for a doument ref to be used. This is an integer value. Document references in the <code>snrfilter-file</code> will be discarded if their <code>!snrScore</code> is less than this.</dd>
 	<dt><code>insertion-target</code></dt>
 	<dd>The HTML text that is searched for, within the current document, and used as the target point. This text should be unique within the document. If it isn't, the first occurrence will be used.</dd>
 	<dt><code>keep-target</code></dt>

@@ -18,7 +18,7 @@
 				cache-duration      86400						// 1 day = 86400 = 24 * 60 * 60 (in seconds)
 				snrfilter-file      `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter`
 				snrfilter-restart   `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter-restart`
-				snr-grades			A,B,C,D						// one or more grades to accept
+				snr-score-min		4							// minimum value of snrScroe to accept
 				insertion-target    <div id=interscribe-target>
 				keep-target			before						// before | after | discard
 				background			#777
@@ -52,7 +52,7 @@ export default class RwserveInterscribe {
 		this.hostname         = hostConfig.hostname;
 		this.pluginConfig     = hostConfig.pluginsConfig.rwserveInterscribe;
 		this.pluginVersion    = this.pluginConfig.pluginVersion;		
-		this.snrGrades        = (this.pluginConfig.snrGrades == undefined) ? ['A', 'B', 'C', 'D'] : this.pluginConfig.snrGrades.split(',');
+		this.snrScoreMin      = (this.pluginConfig.snrScoreMin == undefined) ? 4 : parseInt(this.pluginConfig.snrScoreMin);
 		this.cacheDuration    = this.pluginConfig.cacheDuration;
 		this.insertionTarget  = this.pluginConfig.insertionTarget;
 		this.keepTarget       = this.pluginConfig.keepTarget;
@@ -137,7 +137,6 @@ export default class RwserveInterscribe {
 			return;
 		}
 	}
-
 	
 	async processingSequence(workOrder) {		
 		// Immediately upon arrival here check for problems discovered in the requestHandler
@@ -296,8 +295,12 @@ export default class RwserveInterscribe {
 			if (insertAt == -1)
 				return false;
 			
-			// insert text into resourceText completely replacing the insertionTarget text 
+			// make sure there is something to use
 			var index = this.documentList.incrementIndex();
+			if (index == -1)
+				return false;
+
+			// insert text into resourceText completely replacing the insertionTarget text 
 			var documentRef = this.documentList.documentList[index];
 			var insertionText = documentRef.assembleInsertionText(this.background);
 			var before = (this.keepTarget == 'before') ? this.insertionTarget : '';

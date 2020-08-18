@@ -79,12 +79,12 @@ host {
 			location `$PLUGIN-PATH`
 			config {
 				interscribe-cache   `/srv/rwserve/configuration-docs/interscribe-cache`
-				cache-duration      86400
+				cache-duration      60 // 86400
 				snrfilter-file      `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter`
 				snrfilter-restart   `/srv/rwserve-plugins/node_modules/rwserve-interscribe/etc/data/snrfilter-restart`
-				snr-grades			A,B,C
-				insertion-target    <div id=interscribe-target>
-				keep-target			before
+				snr-score-min		4
+				insertion-target    </body> //<div id=interscribe-target>
+				keep-target			after
 				background			#777
 			}
 		}

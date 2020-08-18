@@ -1,6 +1,6 @@
 {
   "name": "rwserve-interscribe",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "RWSERVE plugin to interscribe text into an existing file",
   "author": "Read Write Tools",
   "license": "MIT",

@@ -9,18 +9,22 @@
 
 
 
+
+
 <figure>
 	<img src='/img/plugins/interscribe/cedalion-on-the-shoulder-of-orion.jpg' width='100%' />
 	<figcaption>Cedalion on the shoulder of Orion, ca. 1410, (artist unknown) </figcaption>
 </figure>
 
+##### Open Source RWSERVE plugin
+
 # Interscribe
 
-## RWSERVE plugin - Shoulders of giants
+## Shoulders of giants
 
 
 <address>
-<img src='/img/rwtools.png' width=80 /> by <a href='https://readwritetools.com' title='Read Write Tools'>Read Write Tools</a> <time datetime=2020-08-08>Aug 8, 2020</time></address>
+<img src='/img/48x48/rwtools.png' /> by <a href='https://readwritetools.com' title='Read Write Tools'>Read Write Tools</a> <time datetime=2020-08-08>Aug 8, 2020</time></address>
 
 
 
